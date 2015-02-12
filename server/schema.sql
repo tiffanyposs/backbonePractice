@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS articles;
+CREATE TABLE articles (
+  id INTEGER PRIMARY KEY,
+  headline TEXT, content TEXT, author TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TRIGGER articles_data BEFORE UPDATE ON articles BEGIN
+  UPDATE articles SET updated_at = CURRENT_TIMESTAMP WHERE id = new.id;
+END;
